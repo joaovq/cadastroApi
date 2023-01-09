@@ -1,9 +1,11 @@
-package br.com.cadastroApi.service;
+package br.com.cadastroApi.service.impl;
 
 import br.com.cadastroApi.entities.Endereco;
 import br.com.cadastroApi.entities.Pessoa;
 import br.com.cadastroApi.repository.EnderecoRepository;
 import br.com.cadastroApi.repository.PessoaRepository;
+import br.com.cadastroApi.service.PessoaService;
+import br.com.cadastroApi.service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,10 @@ import java.util.Optional;
 public class PessoaServiceImpl implements PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
-
+    @Autowired
+    private ViaCepService service;
     @Autowired
     private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private ViaCepService viaCepService;
 
     @Override
     public List<Pessoa> getAll() {
@@ -50,7 +50,7 @@ public class PessoaServiceImpl implements PessoaService {
     private void salvarPessoaComCep(Pessoa pessoa) {
         String cep = pessoa.getEndereco().getCep();
         Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
-            Endereco novoEndereco = viaCepService.consultarCep(cep);
+            Endereco novoEndereco = service.consultarCep(cep);
             enderecoRepository.save(novoEndereco);
             return novoEndereco;
         });
