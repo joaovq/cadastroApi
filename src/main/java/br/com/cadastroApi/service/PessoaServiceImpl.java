@@ -1,6 +1,8 @@
 package br.com.cadastroApi.service;
 
+import br.com.cadastroApi.entities.Endereco;
 import br.com.cadastroApi.entities.Pessoa;
+import br.com.cadastroApi.repository.EnderecoRepository;
 import br.com.cadastroApi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,18 +11,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PessoaServiceImpl implements PessoaService{
+public class PessoaServiceImpl implements PessoaService {
     @Autowired
-    private PessoaRepository repository;
+    private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private ViaCepService viaCepService;
 
     @Override
     public List<Pessoa> getAll() {
-        return repository.findAll();
+        return pessoaRepository.findAll();
     }
 
     @Override
     public Pessoa getPessoaById(Long id) {
-        Optional<Pessoa> pessoaEncontrada = repository.findById(id);
+        Optional<Pessoa> pessoaEncontrada = pessoaRepository.findById(id);
         return pessoaEncontrada.orElse(null);
     }
 
@@ -31,15 +39,22 @@ public class PessoaServiceImpl implements PessoaService{
 
     @Override
     public void update(Long id, Pessoa pessoa) {
-        Optional<Pessoa> pessoa1 = repository.findById(id);
+        Optional<Pessoa> pessoa1 = pessoaRepository.findById(id);
         boolean estaPresente = pessoa1.isPresent();
-        if (estaPresente){
+        if (estaPresente) {
             salvarPessoaComCep(pessoa);
         }
     }
 
 
-    private void salvarPessoaComCep(Pessoa pessoa){
-
+    private void salvarPessoaComCep(Pessoa pessoa) {
+        String cep = pessoa.getEndereco().getCep();
+        Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
+            Endereco novoEndereco = viaCepService.consultarCep(cep);
+            enderecoRepository.save(novoEndereco);
+            return novoEndereco;
+        });
+        pessoa.setEndereco(endereco);
+        pessoaRepository.save(pessoa);
     }
 }
