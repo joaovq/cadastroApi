@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface PessoaService {
-    List<Pessoa> getAll();
+    Iterable<Pessoa> getAll();
     Pessoa getPessoaById(Long id);
     void insert(Pessoa pessoa);
 
