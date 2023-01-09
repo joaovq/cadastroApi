@@ -14,6 +14,8 @@ public class Pessoa {
     private Long id;
     @NonNull
     private String name;
+    @NonNull
     private Date birth;
+    @NonNull
     private Endereco endereco;
 }
