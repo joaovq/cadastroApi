@@ -2,12 +2,14 @@ package br.com.cadastroApi.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import java.util.Date;
 
 @Entity
 @Table(name = "pessoa_tb")
 @Data
+@NoArgsConstructor
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +17,10 @@ public class Pessoa {
     @NonNull
     private String name;
     @NonNull
-    private Date birth;
+    private String birth;
     @NonNull
+    @ManyToOne
     private Endereco endereco;
+
+
 }
