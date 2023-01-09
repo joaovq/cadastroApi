@@ -1,7 +1,7 @@
 package br.com.cadastroApi.controller;
 
 import br.com.cadastroApi.entities.Pessoa;
-import br.com.cadastroApi.service.PessoaServiceImpl;
+import br.com.cadastroApi.service.impl.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ public class PessoaController {
     @Autowired
     private PessoaServiceImpl service;
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<Pessoa>> getAll(){
         List<Pessoa> pessoas = service.getAll();
         return ResponseEntity.ok().body(pessoas);
@@ -27,13 +27,13 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoa);
     }
 
-    @PostMapping("/insert")
-    public ResponseEntity<String> create(@RequestBody Pessoa pessoa){
+    @PostMapping
+    public ResponseEntity<Pessoa> create(@RequestBody Pessoa pessoa){
         service.insert(pessoa);
-        return ResponseEntity.status(201).body("post complete");
+        return ResponseEntity.status(201).body(pessoa);
     }
     @PutMapping("/put/{id}")
-    public ResponseEntity<String> getById(@PathVariable Long id,@RequestBody Pessoa pessoa){
+    public ResponseEntity<String> update(@PathVariable Long id,@RequestBody Pessoa pessoa){
         service.update(id, pessoa);
         return ResponseEntity.status(201).body("update complete");
     }
