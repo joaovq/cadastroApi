@@ -1,7 +1,6 @@
 package br.com.cadastroApi.controller;
 
 import br.com.cadastroApi.entities.Pessoa;
-import br.com.cadastroApi.service.PessoaService;
 import br.com.cadastroApi.service.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
