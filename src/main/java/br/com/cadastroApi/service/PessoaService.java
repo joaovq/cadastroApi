@@ -1,13 +1,14 @@
 package br.com.cadastroApi.service;
 
 import br.com.cadastroApi.entities.Pessoa;
+import br.com.cadastroApi.entities.forms.PessoaForm;
 
 import java.util.List;
 
 public interface PessoaService {
     List<Pessoa> getAll();
     Pessoa getPessoaById(Long id);
-    void insert(Pessoa pessoa);
+    Pessoa insert(PessoaForm pessoa);
 
-    void update(Long id, Pessoa pessoa);
+    Pessoa update(Long id, PessoaForm pessoa);
 }

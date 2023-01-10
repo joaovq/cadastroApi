@@ -2,13 +2,15 @@ package br.com.cadastroApi.service.impl;
 
 import br.com.cadastroApi.entities.Endereco;
 import br.com.cadastroApi.entities.Pessoa;
-import br.com.cadastroApi.repository.EnderecoRepository;
+import br.com.cadastroApi.entities.forms.PessoaForm;
 import br.com.cadastroApi.repository.PessoaRepository;
+import br.com.cadastroApi.service.EnderecoService;
 import br.com.cadastroApi.service.PessoaService;
 import br.com.cadastroApi.service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class PessoaServiceImpl implements PessoaService {
     @Autowired
     private ViaCepService service;
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService enderecoService;
 
     @Override
     public List<Pessoa> getAll() {
@@ -33,35 +35,40 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public void insert(Pessoa pessoa) {
-        salvarPessoaComCep(pessoa);
+    public Pessoa insert(PessoaForm pessoaForm) {
+        return salvarPessoaComCep(pessoaForm);
     }
 
     @Override
-    public void update(Long id, Pessoa pessoa) {
+    public Pessoa update(Long id, PessoaForm pessoa) {
         Optional<Pessoa> pessoa1 = pessoaRepository.findById(id);
         boolean estaPresente = pessoa1.isPresent();
         if (estaPresente) {
-            salvarPessoaComCep(pessoa);
+           return salvarPessoaComCep(pessoa);
         }
+        return null;
     }
 
 
-    private void salvarPessoaComCep(Pessoa pessoa) {
-        Long idEndereco = pessoa.getEndereco().getId();
-        String cep = pessoa.getEndereco().getCep();
-        String numero = pessoa.getEndereco().getNumero();
-        String complemento = pessoa.getEndereco().getComplemento();
-        Endereco endereco = enderecoRepository.findById(idEndereco).orElseGet(() -> {
-            Endereco novoEndereco = service.consultarCep(cep);
-            novoEndereco.setNumero(numero);
-            novoEndereco.setComplemento(complemento);
-            enderecoRepository.save(novoEndereco);
-            return novoEndereco;
-        });
-        endereco.setNumero(numero);
-        endereco.setComplemento(complemento);
-        pessoa.setEndereco(endereco);
-        pessoaRepository.save(pessoa);
+    private Pessoa salvarPessoaComCep(PessoaForm pessoaForm) {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(pessoaForm.getName());
+        pessoa.setDataDeNascimento(pessoaForm.getBirth());
+        pessoa.setEndereco(new ArrayList<>());
+        Pessoa save = pessoaRepository.save(pessoa);
+
+        pessoaForm.getEndereco().setPessoaId(save.getId());
+
+        Endereco novoEndereco = enderecoService.insert(pessoaForm.getEndereco());
+
+        novoEndereco.setPessoa(pessoa);
+        novoEndereco.setNumero(novoEndereco.getNumero());
+        novoEndereco.setComplemento(novoEndereco.getComplemento());
+        novoEndereco.setEPrincipal(true);
+
+
+        pessoa.getEndereco().add(novoEndereco);
+        return pessoaRepository.save(pessoa);
     }
 }
+
