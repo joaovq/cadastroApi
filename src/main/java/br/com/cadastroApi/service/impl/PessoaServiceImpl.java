@@ -48,12 +48,19 @@ public class PessoaServiceImpl implements PessoaService {
 
 
     private void salvarPessoaComCep(Pessoa pessoa) {
+        Long idEndereco = pessoa.getEndereco().getId();
         String cep = pessoa.getEndereco().getCep();
-        Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
+        String numero = pessoa.getEndereco().getNumero();
+        String complemento = pessoa.getEndereco().getComplemento();
+        Endereco endereco = enderecoRepository.findById(idEndereco).orElseGet(() -> {
             Endereco novoEndereco = service.consultarCep(cep);
+            novoEndereco.setNumero(numero);
+            novoEndereco.setComplemento(complemento);
             enderecoRepository.save(novoEndereco);
             return novoEndereco;
         });
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
         pessoa.setEndereco(endereco);
         pessoaRepository.save(pessoa);
     }
