@@ -19,9 +19,14 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
+    private Boolean ePrincipal;
     private String cep;
     private String logradouro;
     private String complemento;
+
     @NonNull
     private String numero;
     private String bairro;
