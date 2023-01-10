@@ -1,5 +1,10 @@
 package br.com.cadastroApi.service;
 
+import br.com.cadastroApi.entities.Endereco;
+
+import java.util.List;
+
 public interface EnderecoService {
-    public void insert();
+    Endereco insert(Endereco endereco);
+    List<Endereco> getAll();
 }
