@@ -16,6 +16,7 @@ class PessoaServiceImplTest {
 
     @Test
     void getAll() {
+
     }
 
     @Test
@@ -30,4 +31,19 @@ class PessoaServiceImplTest {
     void update() {
     }
 
+    @Test
+    void testGetAll() {
+    }
+
+    @Test
+    void testGetPessoaById() {
+    }
+
+    @Test
+    void testInsert() {
+    }
+
+    @Test
+    void testUpdate() {
+    }
 }
