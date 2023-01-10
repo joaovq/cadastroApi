@@ -37,13 +37,15 @@ public class PessoaController {
     }
     //  Criar pessoa
     @PostMapping
-    public ResponseEntity<Pessoa> create(@Valid @RequestBody PessoaForm pessoaForm) throws ParseException {
+    public ResponseEntity<Pessoa> create(@Valid @RequestBody PessoaForm pessoaForm)  {
         Pessoa pessoa = service.insert(pessoaForm);
         return ResponseEntity.status(201).body(pessoa);
     }
 //    Atualizar pessoa
     @PutMapping("/put/{id}")
-    public ResponseEntity<Pessoa> update(@PathVariable Long id,@RequestBody PessoaForm pessoaForm) throws ParseException {
+    public ResponseEntity<Pessoa> update(@PathVariable Long id,
+                                         @Valid @RequestBody PessoaForm pessoaForm)
+             {
         Pessoa pessoaUpdate = service.update(id, pessoaForm);
         return ResponseEntity.status(201).body(pessoaUpdate);
     }
