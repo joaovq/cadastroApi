@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Pessoa {
+//    TODO: adicionar lista de endereços na propertie endereco
+//      Avaliar a adição de PessoaEndereco
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
