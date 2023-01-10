@@ -10,4 +10,6 @@ public interface EnderecoService {
     List<Endereco> getAll();
     List<Endereco> getById(Long id);
     Endereco getAdressPrincipal(Long id);
+
+    String delete(Long id);
 }

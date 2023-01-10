@@ -56,5 +56,11 @@ public class EnderecoServiceImpl implements EnderecoService {
         return enderecoRepository.encontrarEnderecoPricipalDaPessoa(id);
     }
 
+    @Override
+    public String delete(Long id) {
+        enderecoRepository.deleteById(id);
+        return "Delete feito";
+    }
+
 
 }
