@@ -21,7 +21,7 @@ public class PessoaServiceImpl implements PessoaService {
     @Autowired
     private ViaCepService service;
     @Autowired
-    private EnderecoService enderecoService;
+    private EnderecoServiceImpl enderecoService;
 
     @Override
     public List<Pessoa> getAll() {
@@ -55,11 +55,15 @@ public class PessoaServiceImpl implements PessoaService {
         pessoa.setNome(pessoaForm.getName());
         pessoa.setDataDeNascimento(pessoaForm.getBirth());
         pessoa.setEndereco(new ArrayList<>());
-        Pessoa save = pessoaRepository.save(pessoa);
 
+        service.consultarCep(pessoaForm.getEndereco().getCep());
+
+        Pessoa save = pessoaRepository.save(pessoa);
         pessoaForm.getEndereco().setPessoaId(save.getId());
 
         Endereco novoEndereco = enderecoService.insert(pessoaForm.getEndereco());
+
+
 
         novoEndereco.setPessoa(pessoa);
         novoEndereco.setNumero(novoEndereco.getNumero());
