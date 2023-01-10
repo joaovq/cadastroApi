@@ -1,5 +1,11 @@
 package br.com.cadastroApi.controller;
 
+import br.com.cadastroApi.entities.Endereco;
+import br.com.cadastroApi.entities.forms.EnderecoForm;
+import br.com.cadastroApi.service.EnderecoService;
+import br.com.cadastroApi.service.impl.EnderecoServiceImpl;
+import br.com.cadastroApi.service.impl.PessoaServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,6 +17,13 @@ import java.net.http.HttpResponse;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EnderecoControllerTest {
+    EnderecoServiceImpl enderecoService;
+
+    @BeforeEach
+    void setUp() {
+        enderecoService = new EnderecoServiceImpl();
+
+    }
 
     @Test
     void testGetAll(){
@@ -54,4 +67,7 @@ class EnderecoControllerTest {
         assertEquals(200, responseStatusCode);
 
     }
+
+
+
 }
