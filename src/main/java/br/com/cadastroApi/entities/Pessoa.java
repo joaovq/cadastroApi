@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Pessoa {
     @NonNull
     private String nome;
     @NonNull
-    private String dataDeNascimento;
+    private LocalDate dataDeNascimento;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Endereco> endereco;
