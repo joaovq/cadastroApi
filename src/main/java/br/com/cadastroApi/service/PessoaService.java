@@ -11,4 +11,6 @@ public interface PessoaService {
     Pessoa insert(PessoaForm pessoa);
 
     Pessoa update(Long id, PessoaForm pessoa);
+
+    void delete(Long id, Pessoa pessoa);
 }
