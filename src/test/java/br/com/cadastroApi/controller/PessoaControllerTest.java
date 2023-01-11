@@ -1,6 +1,10 @@
 package br.com.cadastroApi.controller;
 
+import br.com.cadastroApi.repository.PessoaRepository;
+import br.com.cadastroApi.service.impl.PessoaServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.net.URI;
@@ -51,4 +55,9 @@ class PessoaControllerTest {
         assertEquals("", body);
         assertEquals(200, responseStatusCode);
     }
+
+
+
+
+
 }
