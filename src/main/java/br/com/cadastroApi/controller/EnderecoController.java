@@ -35,7 +35,7 @@ public class EnderecoController {
         return ResponseEntity.status(200).body(enderecosDaPessoa);
     }
     // encontrar os endereço principal da pessoa
-    @GetMapping("/{id}/principal")
+    @GetMapping("pessoa/{id}/principal")
     private ResponseEntity<Endereco> getPrincipalById(@PathVariable Long id){
         Endereco enderecosDaPessoa = enderecoService.getAdressPrincipal(id);
         return ResponseEntity.status(200).body(enderecosDaPessoa);
