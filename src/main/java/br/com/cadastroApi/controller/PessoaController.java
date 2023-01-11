@@ -15,13 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("pessoas")
 public class PessoaController {
-//TODO: add methods at address
-    /*
-    * TODO:
-        Criar endereço para pessoa
-        Listar endereços da pessoa
-        Poder informar qual endereço é o principal da pessoa
-    * */
     @Autowired
     private PessoaServiceImpl service;
 //    Verificar todas as pessoas
