@@ -1,10 +1,6 @@
 # cadastroApi
 
-Olá, tudo bem com você? Eu sou o João! Sou estudante de programação e estou no meu primeiro ano de técnico.
-
-Tem alguns repositórios meus como estudos direcionados a algumas linguagens de programação e que bom que encontrou este. 👏👏👏
-
-O meu objetivo com estes repositórios é absorver o máximo de conhecimento sobre vários assuntos envolvendo linguagem de programação e tecnologia e da área que eu amo, a de *desenvolvimento de software*. Além disso, poder ajudar quem está estudando também!! 
+Olá, tudo bem com você? Eu sou o João! 
 
 #### Para saber mais sobre mim, visite:
 
@@ -125,11 +121,7 @@ Na url: http://localhost:8080/pessoas/{id}
 ```Json
 {
     "nome":"João",
-    "dataDeNascimento":"05/11/2013",
-    "endereco":{
-        "cep":"40283565",
-        "numero":"94"
-    }
+    "dataDeNascimento":"05/11/2013"
 }
 
 ```
