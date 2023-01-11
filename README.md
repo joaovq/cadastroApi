@@ -17,7 +17,7 @@ O meu objetivo com estes repositórios é absorver o máximo de conhecimento sob
 
 Usando Spring boot, foi feita API simples para gerenciar Pessoas. 
 
-* Para pular para as requisições: https://github.com/joaovq/cadastroApi/edit/master/README.md#requisi%C3%A7%C3%B5es
+* Para pular para as requisições: https://github.com/joaovq/cadastroApi/blob/master/README.md#requisi%C3%A7%C3%B5es
 
 Esta API deve permite:   
 
