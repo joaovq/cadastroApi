@@ -15,9 +15,9 @@ O meu objetivo com estes repositórios é absorver o máximo de conhecimento sob
 
 # O que o projeto faz
 
-Este diretório é utilizado para armazenar os meus exercícios de códigos passados nos cursos da Dio, sobre Collections (Lists, Map e Set) e Stream API em linguagem Java. 
+Usando Spring boot, foi feita API simples para gerenciar Pessoas. 
 
-Usando Spring boot, API simples para gerenciar Pessoas. 
+* Para pular para as requisições: https://github.com/joaovq/cadastroApi/edit/master/README.md#requisi%C3%A7%C3%B5es
 
 Esta API deve permite:   
 
@@ -79,6 +79,75 @@ Foi utilizado no projeto para a validação do cep e segregação de endereços.
  width="50px"
  /></p>
 
+# Requisições
+
+### Exemplo de requisição GET para pessoas
+
+Na url: http://localhost:8080/pessoas 
+
+### Exemplo de requisição GET por id pessoa
+
+Na url: http://localhost:8080/pessoas/{id}
+
+### Exemplo de requisição GET por enderecos
+
+Na url: http://localhost:8080/enderecos
+
+
+### Exemplo de requisição GET por id endereco
+
+Na url: http://localhost:8080/enderecos/3
+
+### Exemplo de requisição GET por id endereco principal
+
+Na url: http://localhost:8080/enderecos/pessoa/3/principal
+
+### Exemplo de requisição POST pra pessoa
+
+Na url: http://localhost:8080/pessoas
+
+```Json
+{
+    "nome": "João",
+    "dataDeNascimento": "23/08/1999",
+    "endereco": {
+        "cep": "40283560",
+        "numero": "1"
+    }
+}
+
+```
+
+### Exemplo de requisição PUT pra pessoa
+
+Na url: http://localhost:8080/pessoas/{id}
+
+```Json
+{
+    "nome":"João",
+    "dataDeNascimento":"05/11/2013",
+    "endereco":{
+        "cep":"40283565",
+        "numero":"94"
+    }
+}
+
+```
+
+### Exemplo de requisição POST para endereco
+
+Na url: http://localhost:8080/pessoas
+
++ Necessário passar o id da pessoa para criar um endereco
+
+```Json
+{
+        "pessoaId":3,
+        "cep":"40243560",
+        "numero":"839"
+    }
+
+```
 
 
 # Como os Usuários podem usar esse projeto?
