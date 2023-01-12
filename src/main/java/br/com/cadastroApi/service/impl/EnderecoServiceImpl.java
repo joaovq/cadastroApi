@@ -25,12 +25,15 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Override
     public Endereco insert(EnderecoForm endereco) {
         List<Endereco> listaDeEnderecos = enderecoRepository.findAll();
+
         Endereco enderecoConsultado = viaCepService.consultarCep(endereco.getCep());
         Optional<Pessoa> pessoa = pessoaRepository.findById(endereco.getPessoaId());
         pessoa.ifPresent(enderecoConsultado::setPessoa);
+
         enderecoConsultado.setNumero(endereco.getNumero());
         enderecoConsultado.setComplemento(endereco.getComplemento());
         enderecoConsultado.setEPrincipal(false);
+
         if (listaDeEnderecos.isEmpty()){
             return enderecoRepository.save(enderecoConsultado);
         }

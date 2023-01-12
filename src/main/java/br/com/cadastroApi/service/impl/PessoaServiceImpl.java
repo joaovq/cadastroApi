@@ -64,17 +64,18 @@ public class PessoaServiceImpl implements PessoaService {
             );
 
             Pessoa pessoaAtualizada = salvarPessoaComCep(pessoa);
-            pessoaRepository.delete(pessoaEncontrada);
-            Long idEnderecoNoBanco = pessoaEncontrada.getEndereco().get(0).getId();
-            enderecoService.delete(idEnderecoNoBanco);
+            delete(pessoaEncontrada);
+
             return pessoaAtualizada;
         }
         return null;
     }
 
     @Override
-    public void delete(Long id, Pessoa pessoa) {
-
+    public void delete(Pessoa pessoa) {
+        pessoaRepository.delete(pessoa);
+        Long idEnderecoNoBanco = pessoa.getEndereco().get(0).getId();
+        enderecoService.delete(idEnderecoNoBanco);
     }
 
 
@@ -108,13 +109,6 @@ public class PessoaServiceImpl implements PessoaService {
         novoEndereco.setComplemento(novoEndereco.getComplemento());
         novoEndereco.setEPrincipal(true);
 
-        List<Endereco> enderecos = new ArrayList<>(){
-            {
-                add(novoEndereco);
-            }
-        };
-
-        pessoa.setEndereco(enderecos);
 
         return pessoaRepository.save(pessoa);
     }
